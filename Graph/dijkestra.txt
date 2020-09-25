@@ -1,0 +1,35 @@
+#function accept array of vector and source vertex.
+
+void dijkestra(vector<pair<int,int> > adj[], int V) 
+{ 
+    priority_queue< pair<int,int>, vector <pair<int,int>> , greater<pair<int,int>> > pq; 
+     
+    vector<int> dist(V, INT_MAX); 
+  
+   
+    pq.push(make_pair(0, 0)); 
+    dist[0] = 0; 
+  
+
+    while (!pq.empty()) 
+    { 
+        int curr_d = pq.top().first; 
+        int curr=pq.top().second;
+        pq.pop(); 
+  
+  
+           for (auto edge : adj[curr]) 
+            {  
+  
+            if (curr_d+edge.second<dist[edge.first])  
+            { 
+                dist[edge.first]=curr_d+edge.second;
+                pq.push(make_pair(dist[edge.first],edge.first));
+            } 
+        } 
+    } 
+  
+    // Print edges of MST using parent array 
+    for (int i = 0; i < V; i++) 
+    cout<<dist[i]<<" ";
+} 
